@@ -1,4 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
+nltk.download('punkt', quiet=True, force=True)
+nltk.download('stopwords', quiet=True, force=True)
+
 from classify_eml import classify_eml
 from attachment_analysis import (
     extract_attachments_and_urls,
@@ -12,9 +15,6 @@ import os
 import uuid
 import re
 import requests
-
-nltk.download('punkt', quiet=True, force=True)
-nltk.download('stopwords', quiet=True, force=True)
 
 app = FastAPI()
 
