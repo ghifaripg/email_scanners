@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+import nltk
 nltk.download('punkt', quiet=True, force=True)
 nltk.download('stopwords', quiet=True, force=True)
 
