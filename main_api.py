@@ -13,6 +13,9 @@ import uuid
 import re
 import requests
 
+nltk.download('punkt', quiet=True, force=True)
+nltk.download('stopwords', quiet=True, force=True)
+
 app = FastAPI()
 
 @app.post("/scan-email/")
