@@ -8,14 +8,42 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import nltk
 import sys
+import os
+import requests
+from tqdm import tqdm
 
-# One-time downloads
-nltk.download('punkt')
-nltk.download('stopwords')
+# One-time NLTK data download (safe to call every time)
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+
+# File paths
+SVM_MODEL_PATH = "svm_word2vec_model.pkl"
+W2V_MODEL_PATH = "word2vec_model.pkl"
+
+# Download word2vec model from Google Drive if missing
+def download_word2vec():
+    if not os.path.exists(W2V_MODEL_PATH):
+        print("📦 Downloading word2vec_model.pkl...")
+        url = "https://drive.usercontent.google.com/download?id=1ZSfZ7p66lcaLX5t574pp-uMqknQfudfF&export=download"
+        response = requests.get(url, stream=True)
+        total_size = int(response.headers.get("content-length", 0))
+        block_size = 1024
+        with open(W2V_MODEL_PATH, "wb") as f, tqdm(
+            desc="Downloading", total=total_size, unit="B", unit_scale=True
+        ) as bar:
+            for data in response.iter_content(block_size):
+                bar.update(len(data))
+                f.write(data)
+
+# Ensure both models exist
+if not os.path.exists(SVM_MODEL_PATH):
+    raise FileNotFoundError(f"{SVM_MODEL_PATH} is missing. Please upload or place it in the app directory.")
+
+download_word2vec()
 
 # Load models
-clf = joblib.load("svm_word2vec_model.pkl")
-w2v_model = joblib.load("word2vec_model.pkl")
+clf = joblib.load(SVM_MODEL_PATH)
+w2v_model = joblib.load(W2V_MODEL_PATH)
 
 # Preprocessing function
 stop_words = set(stopwords.words('english'))
