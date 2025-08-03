@@ -1,7 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
 import nltk
-nltk.download('punkt', quiet=True, force=True)
-nltk.download('stopwords', quiet=True, force=True)
+# Standard tokenizer
+nltk.download("punkt", quiet=True, force=True)
+
+# Fix for your error (punkt_tab is newly required in recent versions)
+nltk.download("punkt_tab", quiet=True, force=True)
+
+nltk.download("stopwords", quiet=True, force=True)
 
 from classify_eml import classify_eml
 from attachment_analysis import (
