@@ -1,9 +1,12 @@
 fastapi
-uvicorn
+uvicorn[standard]
+requests
+shutilwhich
 joblib
-numpy
-pandas
-scikit-learn
 nltk
 gensim
-requests
+scikit-learn
+pandas
+numpy
+email-validator
+gdown
