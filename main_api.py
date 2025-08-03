@@ -117,27 +117,28 @@ async def scan_email(file: UploadFile = File(...)):
         # === Dynamic Weighting ===
         if not url_or_attachment_found:
             # Only header + content
-            total_score = round(
-                (header_score_raw / 0.6) * 0.7 +
-                (content_score_raw / 0.2) * 0.3,
-                2
+            safe_score = (
+                (header_score_raw / 0.6) * 0.6 +
+                (content_score_raw / 0.2) * 0.4
             )
         else:
             # Full system
-            total_score = round(
+            safe_score = (
                 (header_score_raw / 0.6) * 0.5 +
                 (attachment_score_raw / 0.3) * 0.3 +
-                (content_score_raw / 0.2) * 0.2,
-                2
+                (content_score_raw / 0.2) * 0.2
             )
 
-        # Risk Status
+        # Invert: higher total_score means higher risk
+        total_score = round(1.0 - safe_score, 2)
+
+        # === Risk Status ===
         if total_score >= 0.7:
-            status = "Safe"
-        elif total_score >= 0.4:
+            status = "Not Safe"
+        elif total_score >= 0.35:
             status = "Suspicious"
         else:
-            status = "Not Safe"
+            status = "Safe"
 
         # Final Output
         return {
