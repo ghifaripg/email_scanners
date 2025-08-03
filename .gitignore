@@ -1,0 +1,25 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv*/
+venv/
+
+# VSCode settings
+.vscode/
+
+# Email examples and classified samples
+email*
+example_*
+
+# Attachments directory (if it contains temp/test files)
+attachments/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
