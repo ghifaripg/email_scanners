@@ -51,7 +51,7 @@ async def scan_email(file: UploadFile = File(...)):
         url_results = []
         for url in urls:
             try:
-                response = requests.post("http://13.250.41.126:8000/predict/url", json={"url": url}, timeout=10)
+                response = requests.post("http://52.221.203.241:8000/predict/url", json={"url": url}, timeout=10)
                 data = response.json()
                 url_results.append({
                     "url": url,

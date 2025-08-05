@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 # === CONFIGURATION ===
 SAVE_DIR = "attachments"
 VT_API_KEY = "5cdd731ffe102ac14c823178e67cddfddfdca2f92d65c489de9e8f276a19cc27"
-CUSTOM_URL_SCAN_API = "http://54.179.177.191:8000/predict/url"
+CUSTOM_URL_SCAN_API = "http://52.221.203.241:8000/predict/url"
 
 # === HELPERS ===
 
