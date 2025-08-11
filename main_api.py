@@ -16,6 +16,18 @@ from attachment_analysis import (
 )
 from email_analysis import analyze_email_headers
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict to your extension's origin if you want
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 import shutil
 import os
 import uuid
